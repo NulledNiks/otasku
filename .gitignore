@@ -1,0 +1,16 @@
+# Root gitignore
+node_modules
+.env
+.env.local
+dist
+build
+*.log
+.DS_Store
+
+# Frontend specific
+frontend/dist
+frontend/node_modules
+
+# Backend specific
+backend/dist
+backend/node_modules
