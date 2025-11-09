@@ -172,6 +172,21 @@ git add . && git commit -m "Update frontend" && git push origin master && git su
     - Backend: `cd backend && npm run build`
     - Frontend: `cd Frontend && npm run build`
 
+**Common Frontend Issue - Wildcard Route Error:**
+If you see `PathError: Missing parameter name at index` in logs, the `server.js` wildcard route is causing issues. The fix is to use middleware instead of `app.get('*', ...)`:
+
+```javascript
+// ❌ Wrong - causes path-to-regexp errors
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+// ✅ Correct - use middleware
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+```
+
 ### If changes don't appear on Heroku:
 
 1. Clear browser cache (Ctrl+F5)
